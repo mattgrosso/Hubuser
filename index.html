@@ -16,13 +16,13 @@
       <input type="submit" value="submit">
     </form>
 
-    <section id="profile">
+    <section id="profile" class="view-trigger">
       <ul>
-        <li>Username: "username"</li>
-        <li>Name: "Matt Grosso"</li>
-        <li>Repos: "number"</li>
-        <li>Folowers: "number"</li>
-        <li>Account Created: "date"</li>
+        <li>Username: <var id="profileUsername"></var></li>
+        <li>Name: <var id="profileName"></var></li>
+        <li>Repos: <var id="profileRepos"></var></li>
+        <li>Followers: <var id="profileFollowers"></var> (following <var id="profileFollowing"></var>)</li>
+        <li>Account Created: <var id="profileCreated"></var></li>
       </ul>
     </section>
 
@@ -31,6 +31,8 @@
 
     <script src='http://code.jquery.com/jquery-2.2.2.min.js'></script>
     <script src='/js/login_mod.js'></script>
+    <script src='/js/nav_mod.js'></script>
+    <script src='/js/profile_mod.js'></script>
 
   </body>
 </html>
