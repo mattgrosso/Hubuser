@@ -2,7 +2,13 @@
   'use strict';
 
   window.addEventListener('hashchange', function hashNav(event) {
-    ns.doNav();
+    if(ns.token !== ""){
+      ns.doNav();
+    } else {
+      window.location.hash = '#login';
+      ns.doNav();
+    }
+
   });
 
   ns.doNav = function doNav() {
@@ -10,6 +16,9 @@
     $(window.location.hash).show();
   };
 
+  ns.init = function initiate() {
+    ns.doNav();
+  };
 
 
   window.ns = ns;

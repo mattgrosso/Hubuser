@@ -1,7 +1,7 @@
 (function(ns) {
   'use strict';
 
-  function toggleProfileData(userDataObject) {
+  ns.toggleProfileData = function toggleProfileData(userDataObject) {
     var username = userDataObject.login;
     var name = userDataObject.name;
     var repos = userDataObject.public_repos;
@@ -14,9 +14,14 @@
     $('#profileFollowers').text(followers);
     $('#profileFollowing').text(following);
     $('#profileCreated').text(acctStart);
+  };
+
+  if(ns.token !== ""){
+    ns.ajaxLogin(ns.token);
+  } else {
+    window.location.hash = '#login';
+    ns.doNav();
   }
-
-
 
   window.ns = ns;
 })(window.ns || {});
