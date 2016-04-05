@@ -10,18 +10,17 @@
 
   </head>
   <body>
+    <nav id="navbar">
+      <ul>
+        <li id="nav-profile">My Profile</li>
+        <li id="nav-repos">Repos</li>
+      </ul>
+    </nav>
 
     <form id="login" class="view-trigger">
       <input id="token-entry" type="text" value="">
       <input type="submit" value="submit">
     </form>
-
-    <nav id="navbar">
-      <ul>
-        <li>My Profile</li>
-        <li>Repos</li>
-      </ul>
-    </nav>
 
     <section id="profile" class="view-trigger">
       <ul>
@@ -34,14 +33,26 @@
       </ul>
     </section>
 
-
+    <section id="repos" class="view-trigger">
+      <table>
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Stars</td>
+            <td>Open Issues</td>
+          </tr>
+        </thead>
+        <tbody id="repo-list-table-body">
+        </tbody>
+      </table>
+    </section>
 
 
     <script src='http://code.jquery.com/jquery-2.2.2.min.js'></script>
     <script src='/js/login_mod.js'></script>
     <script src='/js/nav_mod.js'></script>
     <script src='/js/profile_mod.js'></script>
-    <!-- <script>window.ns.init();</script> -->
-
+    <script src='/js/repos_mod.js'></script>
+    <script>window.ns.init();</script>
   </body>
 </html>
