@@ -14,6 +14,7 @@ function ajaxRepoList() {
     headers: {Authorization: "token " + ns.userData.token},
     dataType: 'JSON',
     success: function repoListAcquired(data) {
+      console.log(data);
       createRepoList(data);
       addReposToTable(ns.repos);
       window.location.hash = '#repos';
@@ -26,6 +27,7 @@ function ajaxRepoList() {
 }
 
 function createRepoList(repoArray) {
+  ns.repos = [];
   repoArray.forEach(function pullRepoData(each) {
     ns.repos.push({
       name: each.name,
@@ -36,6 +38,7 @@ function createRepoList(repoArray) {
 }
 
 function addReposToTable(array) {
+  $('#repo-list-table-body').empty();
   array.forEach(function addRepoToNewRow(each) {
     $('#repo-list-table-body')
       .append($('<tr>')
