@@ -11,6 +11,13 @@
 
   });
 
+  if(ns.token !== ""){
+    // ns.ajaxLogin(ns.userData.token);
+  } else {
+    window.location.hash = '#login';
+    ns.doNav();
+  }
+
   ns.doNav = function doNav() {
     $('.view-trigger').hide();
     $(window.location.hash).show();
