@@ -1,11 +1,13 @@
 (function(ns) {
   'use strict';
 
-  ns.repos = [];
+  ns.repos = {};
 
-  $('#nav-repos').on('click', function loadRepoList() {
+  ns.repos.load = function loadRepos() {
+    repoList = [];
     ajaxRepoList();
-  });
+  };
+
 
 function ajaxRepoList() {
   $.ajax({
@@ -16,7 +18,7 @@ function ajaxRepoList() {
     success: function repoListAcquired(data) {
       console.log(data);
       createRepoList(data);
-      addReposToTable(ns.repos);
+      addReposToTable(repoList);
       window.location.hash = '#repos';
       ns.doNav();
     },
@@ -27,9 +29,9 @@ function ajaxRepoList() {
 }
 
 function createRepoList(repoArray) {
-  ns.repos = [];
+  repoList = [];
   repoArray.forEach(function pullRepoData(each) {
-    ns.repos.push({
+    repoList.push({
       name: each.name,
       stars: each.stargazers_count,
       issues: each.open_issues
@@ -42,7 +44,12 @@ function addReposToTable(array) {
   array.forEach(function addRepoToNewRow(each) {
     $('#repo-list-table-body')
       .append($('<tr>')
-        .append($('<td>').text(each.name))
+        .append($('<td>')
+          .append($('<a>')
+            .attr({href: '#repo-' + each.name})
+            .text(each.name)
+          )
+        )
         .append($('<td>').text(each.stars))
         .append($('<td>').text(each.issues))
       );

@@ -1,0 +1,6 @@
+{
+  "name": "hubuser",
+  "dependencies": {
+    "jquery": "1.x"
+  }
+}
