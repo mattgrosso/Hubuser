@@ -15,8 +15,10 @@
   ns.doNav = function doNav() {
     $('.view-trigger').hide();
     var modName = window.location.hash.substr(1);
-    if(ns.modName && ns.modName.load){
-      ns.modName.load();
+    if(ns[modName] && ns[modName].load){
+      ns[modName].load();
+    } else if (modName.substr(0, 5) === 'repo-'){
+      ns.repoDetails.load(modName.substr(5));
     }
     $(window.location.hash).show();
   };

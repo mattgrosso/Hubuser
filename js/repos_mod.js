@@ -3,8 +3,9 @@
 
   ns.repos = {};
 
+  var repoList = [];
+
   ns.repos.load = function loadRepos() {
-    repoList = [];
     ajaxRepoList();
   };
 
@@ -18,9 +19,7 @@ function ajaxRepoList() {
     success: function repoListAcquired(data) {
       console.log(data);
       createRepoList(data);
-      addReposToTable(repoList);
-      window.location.hash = '#repos';
-      ns.doNav();
+      addReposToTable(repoList);      
     },
     error: function repoListNotAcquired(xhr) {
       console.log(xhr);

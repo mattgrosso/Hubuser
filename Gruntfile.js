@@ -25,6 +25,10 @@ module.exports = function (grunt) {
       sass: {
         files: ['scss/**/*.scss'],
         tasks: ['sass']
+      },
+      movehtml: {
+        files: ['index.html'],
+        tasks: ['copy:html']
       }
     },
 

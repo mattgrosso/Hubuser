@@ -56,8 +56,10 @@
   ns.doNav = function doNav() {
     $('.view-trigger').hide();
     var modName = window.location.hash.substr(1);
-    if(ns.modName && ns.modName.load){
-      ns.modName.load();
+    if(ns[modName] && ns[modName].load){
+      ns[modName].load();
+    } else if (modName.substr(0, 5) === 'repo-'){
+      ns.repoDetails.load(modName.substr(5));
     }
     $(window.location.hash).show();
   };
@@ -90,23 +92,66 @@
 (function(ns) {
   'use strict';
 
-  ns.repodetails = {};
+  ns.repoDetails = {};
 
-  ns.repodetails.load = function loadRepoDetails() {
-      
+  // 1. Run an ajax for repo details
+  // 2. Create some HTML to display those details.
+  ns.repoDetails.load = function loadRepoDetails(repoName) {
+      console.log('in repo details now');
+      ajaxRepoDetails(repoName);
   };
 
-  function createRepoDetails() {
+  //1. Run and ajax for repo details.
+  function ajaxRepoDetails(repoName) {
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.github.com/repos/' + ns.userData.username + "/" + repoName,
+      headers: {Authorization: "token " + ns.userData.token},
+      dataType: 'JSON',
+      success: function repoListAcquired(data) {
+        createRepoDetails(data);
+
+      },
+      error: function repoListNotAcquired(xhr) {
+        console.log(xhr);
+      }
+    });
+  }
+
+  //2. Create some HTML to display those details.
+  function createRepoDetails(data) {
     $('.repo-detail')
       .attr({id: window.location.hash.substr(3)})
-      .append($('<h2>').text('Put a link to the appropriate repo here'))
-      .append($('<p>').text('Put the description from the repo here'))
-      .append($('<p>').text('Put the number of open issues here'))
+      .append($('<h2>')
+        .append($('<a>')
+          .text(data.name))
+          .attr({href: data.url})
+      )
+      .append($('<p>').text(data.description))
+      .append($('<a>')
+        .text(data.open_issues_count + ' open issues')
+        .attr({href: data.issues_url})
+      )
       .append($('<ul>')
-                .append($('<li>').text('Owner: the name of the owner'))
-                .append($('<li>').text('Stars: the number of stars'))
-                .append($('<li>').text('Forks: the number of forks'))
-                .append($('<li>').text('Created on: the creation date'))
+                .append($('<li>')
+                  .text('Owner: ')
+                  .append($('<p>').text(data.owner.login))
+                )
+                .append($('<li>')
+                  .text('Stars: ')
+                  .append($('<p>').text(data.stargazers_count))
+
+                )
+                .append($('<li>')
+                  .text('Forks: ')
+                  .append($('<p>').text(data.forks_count))
+
+                )
+                .append($('<li>')
+                  .text('Created on: ')
+                  .append($('<p>').text(data.created_at))
+
+                )
       );
   }
 
@@ -120,8 +165,9 @@
 
   ns.repos = {};
 
+  var repoList = [];
+
   ns.repos.load = function loadRepos() {
-    repoList = [];
     ajaxRepoList();
   };
 
@@ -135,9 +181,7 @@ function ajaxRepoList() {
     success: function repoListAcquired(data) {
       console.log(data);
       createRepoList(data);
-      addReposToTable(repoList);
-      window.location.hash = '#repos';
-      ns.doNav();
+      addReposToTable(repoList);      
     },
     error: function repoListNotAcquired(xhr) {
       console.log(xhr);
