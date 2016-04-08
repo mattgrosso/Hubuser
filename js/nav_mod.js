@@ -23,7 +23,7 @@
       });
     } else if (modName.substr(0, 11) === 'repoissues-'){
       ns.repoIssues.load(modName.substr(11), function issuesCallback(element) {
-        ns._addTabs('repoissue', view);
+        ns._addTabs('repoissues', view);
         element.show();
       });
 
