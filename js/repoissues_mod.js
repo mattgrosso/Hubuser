@@ -33,6 +33,12 @@
     $('.repo-issues').empty();
     $('.repo-issues')
       .addClass('view-trigger')
+      .append($('<a>')
+          .append($('<button>')
+            .text('New Issue')
+          )
+          .attr({href: '#reponewissue'})
+      )
       .append(
         $('<table>')
           .append(
