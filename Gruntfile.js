@@ -51,10 +51,31 @@ module.exports = function (grunt) {
     concat: {
       options: {
         seperator: ';',
+        soureceMap: true
       },
       js: {
         src: ['js/*.js'],
         dest: 'build/js/main.js'
+      }
+    },
+
+    mocha: {
+      all: {
+        // urls: ['localhost:8888/test/(((nameoftestharness))).html']
+        //
+        // This needs to be in the test harness.
+        // if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+        //   mocha.run();
+        // }
+      }
+    },
+
+    connect: {
+      server: {
+        options: {
+          port: 8888,
+          base: '.'
+        }
       }
     }
 
@@ -66,10 +87,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
 
   grunt.registerTask('default', [ 'clean', 'copy', 'jsbuild', 'css-build']);
   grunt.registerTask('jsbuild', ['jshint', 'concat:js']);
   grunt.registerTask('css-build', ['sass']);
+  grunt.registerTask('test', ['connect', 'mocha']);
 
 };

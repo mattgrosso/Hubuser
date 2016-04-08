@@ -2,32 +2,41 @@
   'use strict';
 
   window.addEventListener('hashchange', function hashNav(event) {
-    if(ns.userData.token !== ""){
-      ns.doNav();
-    }
-    else {
-      window.location.hash = '#login';
-      ns.doNav();
-    }
-
+    ns.doNav(window.location.hash);
   });
 
-  ns.doNav = function doNav() {
+  ns.doNav = function doNav(view) {
     $('.view-trigger').hide();
-    var modName = window.location.hash.substr(1);
+    if(!ns.userData.token && view !== '#login'){
+      window.location.hash = '#login';
+      return;
+    }
+    view = (view || "");
+    var viewElement = $(view);
+    var modName = view.substr(1);
+    console.log(modName);
+    console.log(modName.substr(0, 11));
     if(ns[modName] && ns[modName].load){
       ns[modName].load();
     } else if (modName.substr(0, 5) === 'repo-'){
-      ns.repoDetails.load(modName.substr(5));
+      ns.repoDetails.load(modName.substr(5), function detailsCallback(element) {
+        element.show();
+      });
     } else if (modName.substr(0, 11) === 'repoissues-'){
-      ns.repoIssues.load(modName.substr(11));
+      console.log('triggering repoissues- function');
+      ns.repoIssues.load(modName.substr(11), function issuesCallback(element) {
+        element.show();
+      });
+
+    } else if (!viewElement.length) {
+      window.location.hash = '#login';
+      return;
     }
-    $(window.location.hash).show();
+    viewElement.show();
   };
 
   ns.init = function init() {
-    window.location.hash = '#login';
-    ns.doNav();
+    ns.doNav(window.location.hash);
   };
 
 

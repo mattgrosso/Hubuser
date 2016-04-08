@@ -5,19 +5,20 @@
 
   // 1. Run an ajax for repo details
   // 2. Create some HTML to display those details.
-  ns.repoDetails.load = function loadRepoDetails(repoName) {
-      ajaxRepoDetails(repoName);
+  ns.repoDetails.load = function loadRepoDetails(repoName, cb) {
+      ajaxRepoDetails(repoName, cb);
   };
 
   //1. Run and ajax for repo details.
-  function ajaxRepoDetails(repoName) {
+  function ajaxRepoDetails(repoName, cb) {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/repos/' + ns.userData.username + "/" + repoName,
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
-        createRepoDetails(data);
+        var element = createRepoDetails(data);
+        cb(element);
       },
       error: function repoListNotAcquired(xhr) {
         console.log(xhr);
@@ -29,7 +30,8 @@
   function createRepoDetails(data) {
     console.log(data);
 
-    $('.repo-detail')
+    return $('.repo-detail')
+      .empty()
       .attr({id: window.location.hash.substr(3)})
       .addClass('view-trigger')
       .append($('<h2>')

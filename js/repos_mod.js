@@ -26,6 +26,7 @@ function ajaxRepoList() {
   });
 }
 
+// ns.repos._createRepoList = function createRepoList(repoArray) {
 function createRepoList(repoArray) {
   repoList = [];
   repoArray.forEach(function pullRepoData(each) {

@@ -6,19 +6,20 @@
 //1. ajax to get issues from given repo
 //2. display those issues in a table
 
-  ns.repoIssues.load = function loadRepoIssues(repoName) {
-    ajaxRepoIssues(repoName);
+  ns.repoIssues.load = function loadRepoIssues(repoName, cb) {
+    ajaxRepoIssues(repoName, cb);
   };
 
 //1. ajax to get issues from a given repo
-  function ajaxRepoIssues(repoName) {
+  function ajaxRepoIssues(repoName, cb) {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/repos/' + ns.userData.username + '/' + repoName + '/issues',
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
-        createRepoIssuesTable(data);
+        var element = createRepoIssuesTable(data);
+        cb(element);
       },
       error: function repoListNotAcquired(xhr) {
         console.log(xhr);
@@ -31,6 +32,7 @@
   function createRepoIssuesTable(data) {
     $('.repo-issues').empty();
     $('.repo-issues')
+      .addClass('view-trigger')
       .append(
         $('<table>')
           .append(
@@ -65,7 +67,7 @@
             )
         );
     });
-
+    return($('.repo-issues'));
   }
 
 

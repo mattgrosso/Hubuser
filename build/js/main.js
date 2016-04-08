@@ -43,32 +43,41 @@
   'use strict';
 
   window.addEventListener('hashchange', function hashNav(event) {
-    if(ns.userData.token !== ""){
-      ns.doNav();
-    }
-    else {
-      window.location.hash = '#login';
-      ns.doNav();
-    }
-
+    ns.doNav(window.location.hash);
   });
 
-  ns.doNav = function doNav() {
+  ns.doNav = function doNav(view) {
     $('.view-trigger').hide();
-    var modName = window.location.hash.substr(1);
+    if(!ns.userData.token && view !== '#login'){
+      window.location.hash = '#login';
+      return;
+    }
+    view = (view || "");
+    var viewElement = $(view);
+    var modName = view.substr(1);
+    console.log(modName);
+    console.log(modName.substr(0, 11));
     if(ns[modName] && ns[modName].load){
       ns[modName].load();
     } else if (modName.substr(0, 5) === 'repo-'){
-      ns.repoDetails.load(modName.substr(5));
+      ns.repoDetails.load(modName.substr(5), function detailsCallback(element) {
+        element.show();
+      });
     } else if (modName.substr(0, 11) === 'repoissues-'){
-      ns.repoIssues.load(modName.substr(11));
+      console.log('triggering repoissues- function');
+      ns.repoIssues.load(modName.substr(11), function issuesCallback(element) {
+        element.show();
+      });
+
+    } else if (!viewElement.length) {
+      window.location.hash = '#login';
+      return;
     }
-    $(window.location.hash).show();
+    viewElement.show();
   };
 
   ns.init = function init() {
-    window.location.hash = '#login';
-    ns.doNav();
+    ns.doNav(window.location.hash);
   };
 
 
@@ -98,19 +107,20 @@
 
   // 1. Run an ajax for repo details
   // 2. Create some HTML to display those details.
-  ns.repoDetails.load = function loadRepoDetails(repoName) {
-      ajaxRepoDetails(repoName);
+  ns.repoDetails.load = function loadRepoDetails(repoName, cb) {
+      ajaxRepoDetails(repoName, cb);
   };
 
   //1. Run and ajax for repo details.
-  function ajaxRepoDetails(repoName) {
+  function ajaxRepoDetails(repoName, cb) {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/repos/' + ns.userData.username + "/" + repoName,
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
-        createRepoDetails(data);
+        var element = createRepoDetails(data);
+        cb(element);
       },
       error: function repoListNotAcquired(xhr) {
         console.log(xhr);
@@ -122,7 +132,8 @@
   function createRepoDetails(data) {
     console.log(data);
 
-    $('.repo-detail')
+    return $('.repo-detail')
+      .empty()
       .attr({id: window.location.hash.substr(3)})
       .addClass('view-trigger')
       .append($('<h2>')
@@ -169,19 +180,20 @@
 //1. ajax to get issues from given repo
 //2. display those issues in a table
 
-  ns.repoIssues.load = function loadRepoIssues(repoName) {
-    ajaxRepoIssues(repoName);
+  ns.repoIssues.load = function loadRepoIssues(repoName, cb) {
+    ajaxRepoIssues(repoName, cb);
   };
 
 //1. ajax to get issues from a given repo
-  function ajaxRepoIssues(repoName) {
+  function ajaxRepoIssues(repoName, cb) {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/repos/' + ns.userData.username + '/' + repoName + '/issues',
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
-        createRepoIssuesTable(data);
+        var element = createRepoIssuesTable(data);
+        cb(element);
       },
       error: function repoListNotAcquired(xhr) {
         console.log(xhr);
@@ -194,6 +206,7 @@
   function createRepoIssuesTable(data) {
     $('.repo-issues').empty();
     $('.repo-issues')
+      .addClass('view-trigger')
       .append(
         $('<table>')
           .append(
@@ -228,7 +241,7 @@
             )
         );
     });
-
+    return($('.repo-issues'));
   }
 
 
@@ -272,6 +285,7 @@ function ajaxRepoList() {
   });
 }
 
+// ns.repos._createRepoList = function createRepoList(repoArray) {
 function createRepoList(repoArray) {
   repoList = [];
   repoArray.forEach(function pullRepoData(each) {
