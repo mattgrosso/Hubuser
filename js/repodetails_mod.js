@@ -6,7 +6,6 @@
   // 1. Run an ajax for repo details
   // 2. Create some HTML to display those details.
   ns.repoDetails.load = function loadRepoDetails(repoName) {
-      console.log('in repo details now');
       ajaxRepoDetails(repoName);
   };
 
@@ -19,7 +18,6 @@
       dataType: 'JSON',
       success: function repoListAcquired(data) {
         createRepoDetails(data);
-
       },
       error: function repoListNotAcquired(xhr) {
         console.log(xhr);
@@ -29,8 +27,11 @@
 
   //2. Create some HTML to display those details.
   function createRepoDetails(data) {
+    console.log(data);
+
     $('.repo-detail')
       .attr({id: window.location.hash.substr(3)})
+      .addClass('view-trigger')
       .append($('<h2>')
         .append($('<a>')
           .text(data.name))
@@ -39,7 +40,7 @@
       .append($('<p>').text(data.description))
       .append($('<a>')
         .text(data.open_issues_count + ' open issues')
-        .attr({href: data.issues_url})
+        .attr({href: '#repoissues-' + data.name})
       )
       .append($('<ul>')
                 .append($('<li>')

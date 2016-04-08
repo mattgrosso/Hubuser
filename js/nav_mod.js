@@ -19,6 +19,8 @@
       ns[modName].load();
     } else if (modName.substr(0, 5) === 'repo-'){
       ns.repoDetails.load(modName.substr(5));
+    } else if (modName.substr(0, 11) === 'repoissues-'){
+      ns.repoIssues.load(modName.substr(11));
     }
     $(window.location.hash).show();
   };

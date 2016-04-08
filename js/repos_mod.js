@@ -17,9 +17,8 @@ function ajaxRepoList() {
     headers: {Authorization: "token " + ns.userData.token},
     dataType: 'JSON',
     success: function repoListAcquired(data) {
-      console.log(data);
       createRepoList(data);
-      addReposToTable(repoList);      
+      addReposToTable(repoList);
     },
     error: function repoListNotAcquired(xhr) {
       console.log(xhr);
