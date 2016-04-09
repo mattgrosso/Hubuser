@@ -17,6 +17,9 @@
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
+        ns.reponewissue.repoName = data.name;
+        ns.reponewissue.repoURL = data.html_url;
+        ns.reponewissue.repoOwner = data.owner.login;
         var element = createRepoDetails(data);
         cb(element);
       },
