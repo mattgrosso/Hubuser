@@ -28,8 +28,6 @@
 
   //2. Create some HTML to display those details.
   function createRepoDetails(data) {
-    console.log(data);
-
     return $('.repo-detail')
       .empty()
       .attr({id: window.location.hash.substr(3)})

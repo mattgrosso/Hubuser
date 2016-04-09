@@ -26,7 +26,6 @@
         ns._addTabs('repoissues', view);
         element.show();
       });
-
     } else if (!viewElement.length) {
       window.location.hash = '#login';
       return;

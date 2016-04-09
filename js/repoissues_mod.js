@@ -18,6 +18,8 @@
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
+        ns.reponewissue.repoURL = data[0].repository_url;
+        ns.reponewissue.repoName = data[0].repository_url.split('/')[5];
         var element = createRepoIssuesTable(data);
         cb(element);
       },

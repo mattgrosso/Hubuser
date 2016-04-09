@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nav Harness</title>
+    <!-- Let's give out test results a little style -->
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="mocha"></div>
+    <div id="fixtures">
+
+      <nav id="navbar">
+        <ul>
+          <li id="nav-profile">My Profile</li>
+          <li id="nav-repos"><a href="#repos">Repos</a></li>
+        </ul>
+      </nav>
+
+      <section id="section1" class='view-trigger'></section>
+      <section id="section2" class='view-trigger'></section>
+      <section id="section3" class='view-trigger'></section>
+
+    </div>
+
+    <!-- library scripts -->
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="http://chaijs.com/chai.js"></script>
+
+    <!-- Mocha Setup -->
+    <script>mocha.setup('tdd')</script> <!-- this tells mocha we're using TDD style -->
+
+    <!-- Our code... -->
+    <script src='http://code.jquery.com/jquery-2.2.2.min.js'></script>
+    <script src='../js/nav_mod.js'></script>
+
+    <!-- And our tests! -->
+    <script src='specs/nav_mod.js'></script>
+
+    <!-- Kick the whole thing off... -->
+    <script>mocha.run();</script>
+</body>
+</html>
