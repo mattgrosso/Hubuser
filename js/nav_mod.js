@@ -45,6 +45,7 @@
           )
         );
     } else if(type === 'repoissues') {
+      $('#repo-issues-tab').remove();
       $('#temp-tags')
         .append($('<li>')
           .attr({id: 'repo-issues-tab'})
@@ -54,6 +55,7 @@
           )
         );
     } else if(type === 'reponewissue'){
+      $('#repo-new-issue').remove();
       $('#temp-tags')
         .append($('<li>')
           .attr({id: 'repo-new-issue'})
