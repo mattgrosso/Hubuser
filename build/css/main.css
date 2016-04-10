@@ -28,9 +28,6 @@ body {
   #login input:focus {
     outline: none; }
 
-a:hover {
-  text-decoration: none; }
-
 main {
   position: relative;
   display: none;
@@ -38,7 +35,12 @@ main {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  padding: 30px; }
+  padding: 30px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; }
+
+a:hover {
+  text-decoration: none; }
 
 #user-image {
   position: absolute;

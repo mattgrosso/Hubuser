@@ -35,10 +35,6 @@ body{
   }
 }
 
-a:hover {
-  text-decoration: none;
-}
-
 main{
   position: relative;
   display: none;
@@ -47,6 +43,12 @@ main{
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   padding: 30px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 #user-image{
