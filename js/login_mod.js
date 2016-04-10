@@ -17,7 +17,7 @@
       headers: {Authorization: "token " + ns.userData.token},
       success: function tokenAcquired(data) {
         createUserObject(data);
-        ns.toggleProfileData();
+        // ns.toggleProfileData();
         window.location.hash = '#profile';
       },
       error: function tokenNotAcquired(xhr) {

@@ -17,7 +17,7 @@
       headers: {Authorization: "token " + ns.userData.token},
       success: function tokenAcquired(data) {
         createUserObject(data);
-        ns.toggleProfileData();
+        // ns.toggleProfileData();
         window.location.hash = '#profile';
       },
       error: function tokenNotAcquired(xhr) {
@@ -124,7 +124,14 @@
 (function(ns) {
   'use strict';
 
-  ns.toggleProfileData = function toggleProfileData() {
+  ns.profile = {};
+
+  ns.profile.load = function loadProfile() {
+    toggleProfileData();
+  };
+
+
+  function toggleProfileData() {
     $('#profileUsername').text(ns.userData.username);
     $('#profileName').text(ns.userData.name);
     $('#profileRepos').text(ns.userData.repos);
@@ -132,7 +139,7 @@
     $('#profileFollowing').text(ns.userData.following);
     $('#profileCreated').text(ns.userData.acctStart);
     $('#user-image').attr({src: ns.userData.userImage});
-  };
+  }
 
   window.ns = ns;
 })(window.ns || {});
