@@ -1,9 +1,11 @@
 (function(ns) {
   'use strict';
 
+
   window.addEventListener('hashchange', function hashNav(event) {
     ns.doNav(window.location.hash);
   });
+
 
   ns.doNav = function doNav(view) {
     $('.view-trigger').hide();
@@ -33,6 +35,8 @@
     }
     viewElement.show();
   };
+
+
 
   ns._addTabs = function addTabs(type, hash) {
     if(type === 'repodetail') {
@@ -73,8 +77,6 @@
       return 'not a type';
     }
   };
-
-
 
 
   ns.init = function init() {

@@ -44,9 +44,33 @@
 (function(ns) {
   'use strict';
 
+  ns.logout = {};
+
+  ns.logout.load = function loadLogout() {
+      ns.userData = {};
+      $('#navbar').hide();
+      $('main').hide();
+      $('#profile').empty();
+      $('#repos').empty();
+      $('.repo-detail').empty();
+      $('.repo-issues').empty();
+      $('#reponewissue').empty();
+      $('#temp-tags').empty();
+      window.location.hash = '#login';
+  };
+
+
+  window.ns = ns;
+})(window.ns || {});
+
+(function(ns) {
+  'use strict';
+
+
   window.addEventListener('hashchange', function hashNav(event) {
     ns.doNav(window.location.hash);
   });
+
 
   ns.doNav = function doNav(view) {
     $('.view-trigger').hide();
@@ -76,6 +100,8 @@
     }
     viewElement.show();
   };
+
+
 
   ns._addTabs = function addTabs(type, hash) {
     if(type === 'repodetail') {
@@ -116,8 +142,6 @@
       return 'not a type';
     }
   };
-
-
 
 
   ns.init = function init() {

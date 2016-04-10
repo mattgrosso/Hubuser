@@ -22,6 +22,7 @@ a:hover {
 }
 
 body{
+  position: relative;
   width: 75%;
   margin: auto;
   margin-top: 25px;
@@ -111,4 +112,10 @@ main{
   button{
     margin: 7px;
   }
+}
+
+#logout{
+  position: absolute;
+  top: 0;
+  right: 0;
 }

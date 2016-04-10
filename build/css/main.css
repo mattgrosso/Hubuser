@@ -17,6 +17,7 @@ a:hover {
   text-decoration: none; }
 
 body {
+  position: relative;
   width: 75%;
   margin: auto;
   margin-top: 25px; }
@@ -87,5 +88,10 @@ main {
   outline: none; }
 #reponewissue button {
   margin: 7px; }
+
+#logout {
+  position: absolute;
+  top: 0;
+  right: 0; }
 
 /*# sourceMappingURL=main.css.map */
