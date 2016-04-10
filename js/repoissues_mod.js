@@ -7,6 +7,7 @@
 //2. display those issues in a table
 
   ns.repoIssues.load = function loadRepoIssues(repoName, cb) {
+    $('#repo-new-issue').remove();
     ajaxRepoIssues(repoName, cb);
   };
 

@@ -15,16 +15,36 @@
 
   //Add a form and a header.
   function populateNewIssueForm() {
-    $('#new-issue-repo-name')
-      .attr({href: ns.reponewissue.repoURL})
-      .text(ns.reponewissue.repoName);
+    $('#reponewissue').empty();
+    $('#reponewissue')
+      .append($('<h2>')
+        .append($('<a>')
+          .attr({id: 'new-issue-repo-name', href: ns.reponewissue.repoURL})
+          .text(ns.reponewissue.repoName)
+        )
+      )
+      .append($('<form>')
+        .attr({action: '', method: 'post'})
+        .append($('<textarea>')
+          .attr({id: 'new-issue-title', rows: '2', cols: '40'})
+        )
+        .append($('<textarea>')
+          .attr({id: 'new-issue-body', rows: '8', cols: '40'})
+        )
+      )
+      .append($('<button>')
+        .attr({type: 'button', href: '#repoissues-' + ns.reponewissue.repoName})
+        .text('Cancel')
+      )
+      .append($('<button>')
+        .attr({id: 'new-issue-submit-button'})
+        .text('Submit')
+      );
   }
-  
-  $('#new-issue-submit-button').on('click', function testClick() {
+
+  $('#reponewissue').on('click', '#new-issue-submit-button', function newIssueSubmit() {
     event.preventDefault();
-    ajaxPostNewIssue(
-      $('#new-issue-title').val(),
-      $('#new-issue-body').val()
+    ajaxPostNewIssue( $('#new-issue-title').val(), $('#new-issue-body').val()
     );
   });
 
@@ -41,7 +61,7 @@
         body: body
       }),
       success: function issuePosted(data) {
-        console.log(data);
+        window.location.hash = '#repoissues-' + ns.reponewissue.repoName;
       },
       error: function issueNotPosted(xhr) {
         console.log(xhr);
