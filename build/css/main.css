@@ -10,6 +10,8 @@
   box-shadow: 2px 2px 25px #4C4C4C; }
   #login h2 {
     margin-top: 0px; }
+  #login input:focus {
+    outline: none; }
 
 a:hover {
   text-decoration: none; }
@@ -73,7 +75,17 @@ main {
 #repo-issues h2 {
   position: relative;
   top: -18px;
-  left: 25px;
+  left: 20px;
   float: left; }
+
+#new-issue-title, #new-issue-body {
+  clear: both;
+  width: 100%;
+  margin: auto; }
+
+#reponewissue textarea:focus {
+  outline: none; }
+#reponewissue button {
+  margin: 7px; }
 
 /*# sourceMappingURL=main.css.map */

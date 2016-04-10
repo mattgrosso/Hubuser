@@ -12,6 +12,9 @@
   h2{
     margin-top: 0px;
   }
+  input:focus{
+    outline: none;
+  }
 }
 
 a:hover {
@@ -91,6 +94,21 @@ main{
 #repo-issues h2{
   position: relative;
   top: -18px;
-  left: 25px;
+  left: 20px;
   float: left;
+}
+
+#new-issue-title, #new-issue-body{
+  clear: both;
+  width: 100%;
+  margin: auto;
+}
+
+#reponewissue{
+  textarea:focus{
+    outline: none;
+  }
+  button{
+    margin: 7px;
+  }
 }
