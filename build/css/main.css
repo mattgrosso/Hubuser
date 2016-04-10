@@ -1,5 +1,20 @@
+body {
+  background-color: #C5F2E7;
+  position: relative;
+  width: 75%;
+  margin: auto;
+  margin-top: 25px; }
+
 #navbar {
   display: none; }
+
+.navtabs a {
+  background-color: white; }
+
+#logout {
+  position: absolute;
+  top: 0;
+  right: 20px; }
 
 #login {
   width: 350px;
@@ -16,15 +31,10 @@
 a:hover {
   text-decoration: none; }
 
-body {
-  position: relative;
-  width: 75%;
-  margin: auto;
-  margin-top: 25px; }
-
 main {
   position: relative;
   display: none;
+  background-color: white;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -84,14 +94,12 @@ main {
   width: 100%;
   margin: auto; }
 
+#new-issue-title {
+  max-width: 400px; }
+
 #reponewissue textarea:focus {
   outline: none; }
 #reponewissue button {
   margin: 7px; }
-
-#logout {
-  position: absolute;
-  top: 0;
-  right: 0; }
 
 /*# sourceMappingURL=main.css.map */
