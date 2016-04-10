@@ -39,7 +39,7 @@
       .append($('<h2>')
         .append($('<a>')
           .text(window.location.hash.substr(12))
-          .attr({href: 'https://github.com/' + ns.userData.username + "/" + window.location.hash.substr(12), target: '_blank'})
+          .attr({href: 'https://github.com/' + ns.userData.username + "/" + window.location.hash.substr(12) + "/issues", target: '_blank'})
         )
       )
       .append($('<a>')
@@ -67,13 +67,16 @@
               .attr({id: 'issues-table-body'})
           )
       );
-    data.forEach(function addIssuesToTableRows(each) {
+    data.forEach(function addIssuesToTableRows(each, i) {
       $('#issues-table-body')
         .append(
           $('<tr>')
             .append($('<td>')
               .addClass('repo-issues-table-titles')
-              .text(each.title)
+              .append($('<a>')
+                .attr({href: data[i].html_url})
+                .text(each.title)
+              )
             )
             .append($('<td>')
               .addClass('repo-issues-table-names')
