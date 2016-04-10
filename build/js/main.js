@@ -241,6 +241,7 @@
       headers: {Authorization: "token " + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
+        console.log(data);
         var element = createRepoIssuesTable(data);
         cb(element);
       },
@@ -255,15 +256,25 @@
   function createRepoIssuesTable(data) {
     $('.repo-issues').empty();
     $('.repo-issues')
+      .attr({id: 'repo-issues'})
       .addClass('view-trigger')
+      .append($('<h2>')
+        .append($('<a>')
+          .text(window.location.hash.substr(12))
+          .attr({href: 'https://github.com/' + ns.userData.username + "/" + window.location.hash.substr(12), target: '_blank'})
+        )
+      )
       .append($('<a>')
           .append($('<button>')
+            .attr({id: 'new-issue-button'})
             .text('New Issue')
           )
           .attr({href: '#reponewissue'})
       )
       .append(
         $('<table>')
+          .addClass('table table-bordered table-striped table-hover')
+          .attr({id: 'repo-issues-table'})
           .append(
             $('<thead>')
               .append(
@@ -283,12 +294,15 @@
         .append(
           $('<tr>')
             .append($('<td>')
+              .addClass('repo-issues-table-titles')
               .text(each.title)
             )
             .append($('<td>')
+              .addClass('repo-issues-table-names')
               .text(each.user.login)
             )
             .append($('<td>')
+              .addClass('repo-issues-table-close')
               .append(
                 $('<button>')
                   .text('Close Issue')

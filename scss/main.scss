@@ -14,6 +14,10 @@
   }
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 body{
   width: 75%;
   margin: auto;
@@ -47,9 +51,10 @@ main{
   }
 }
 
-#repo-table{
+#repo-table, #repo-issues-table{
   width: 75%;
   margin: auto;
+  clear: both;
   thead tr{
     font-size: 1.75em;
   }
@@ -58,7 +63,7 @@ main{
   }
 }
 
-.repo-table-stars, .repo-table-issues{
+.repo-table-stars, .repo-table-issues, .repo-issues-table-names, .repo-issues-table-close{
   text-align: center;
 }
 
@@ -72,4 +77,20 @@ main{
     padding: 10px;
     font-size: 1.5em
   }
+}
+
+#new-issue-button{
+  display: block;
+  width: 150px;
+  height: 35px;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 25px;
+}
+
+#repo-issues h2{
+  position: relative;
+  top: -18px;
+  left: 25px;
+  float: left;
 }
