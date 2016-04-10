@@ -41,6 +41,25 @@ function createRepoList(repoArray) {
 
 function addReposToTable(array) {
   $('#repo-list-table-body').empty();
+  $('#repos')
+    .append($('<table>')
+      .append($('<thead>')
+        .append($('<tr>')
+          .append($('<td>')
+            .text('Name')
+          )
+          .append($('<td>')
+            .text('Stars')
+          )
+          .append($('<td>')
+            .text('Open Issues')
+          )
+        )
+      )
+      .append($('<tbody>')
+        .attr({id: 'repo-list-table-body'})
+      )
+    );
   array.forEach(function addRepoToNewRow(each) {
     $('#repo-list-table-body')
       .append($('<tr>')

@@ -1,0 +1,48 @@
+#navbar{
+  display: none;
+}
+
+#login{
+  width: 350px;
+  margin: auto;
+  margin-top: 10%;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 2px 2px 25px #4C4C4C;
+  h2{
+    margin-top: 0px;
+  }
+}
+
+body{
+  width: 75%;
+  margin: auto;
+  margin-top: 25px;
+}
+
+main{
+  position: relative;
+  display: none;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 30px;
+}
+
+#user-image{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  width: 150px;
+  border: 1px solid #ddd;
+}
+
+#profile-list{
+  list-style: none;
+  font-size: 1.5em;
+  padding: 10px;
+  li{
+    padding: 10px;
+  }
+}

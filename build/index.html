@@ -20,49 +20,33 @@
       </ul>
     </nav>
 
-    <form id="login" class="view-trigger">
+    <form id="login" class="view-trigger alert alert-warning">
+      <h2>Please log in with your Github token</h2>
       <input id="token-entry" type="text" value="">
       <input type="submit" value="submit">
     </form>
 
-    <section id="profile" class="view-trigger">
-      <ul>
-        <li>Username: <var id="profileUsername"></var></li>
-        <li>Name: <var id="profileName"></var></li>
-        <li>Repos: <var id="profileRepos"></var></li>
-        <li>Followers: <var id="profileFollowers"></var> (following <var id="profileFollowing"></var>)</li>
-        <li>Account Created: <var id="profileCreated"></var></li>
-        <img id="user-image" src="" alt="user image" />
-      </ul>
-    </section>
+    <main>
 
-    <section id="repos" class="view-trigger">
-      <table>
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td>Stars</td>
-            <td>Open Issues</td>
-          </tr>
-        </thead>
-        <tbody id="repo-list-table-body">
-        </tbody>
-      </table>
-    </section>
+      <section id="profile" class="view-trigger"></section>
 
-    <section class="repo-detail"></section>
+      <section id="repos" class="view-trigger"></section>
 
-    <section class="repo-issues"></section>
+      <section class="repo-detail"></section>
 
-    <section id="reponewissue" class="view-trigger">
-      <h2><a id="new-issue-repo-name" href=""></a></h2>
-      <form action="" method="post">
-        <textarea id="new-issue-title" rows="2" cols="40"></textarea>
-        <textarea id="new-issue-body" rows="8" cols="40"></textarea>
-        <button type="button">Cancel</button>
-        <button id="new-issue-submit-button">Submit</button>
-      </form>
-    </section>
+      <section class="repo-issues"></section>
+
+      <section id="reponewissue" class="view-trigger">
+        <h2><a id="new-issue-repo-name" href=""></a></h2>
+        <form action="" method="post">
+          <textarea id="new-issue-title" rows="2" cols="40"></textarea>
+          <textarea id="new-issue-body" rows="8" cols="40"></textarea>
+          <button type="button">Cancel</button>
+          <button id="new-issue-submit-button">Submit</button>
+        </form>
+      </section>
+
+    </main>
 
     <script src='http://code.jquery.com/jquery-2.2.2.min.js'></script>
     <script src='/js/main.js'></script>

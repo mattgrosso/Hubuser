@@ -17,6 +17,8 @@
       headers: {Authorization: "token " + ns.userData.token},
       success: function tokenAcquired(data) {
         createUserObject(data);
+        $('#navbar').show();
+        $('main').show();
         window.location.hash = '#profile';
       },
       error: function tokenNotAcquired(xhr) {
@@ -33,6 +35,7 @@
     ns.userData.following = data.following;
     ns.userData.acctStart = data.created_at;
     ns.userData.userImage = data.avatar_url;
+    ns.userData.userURL = data.html_url;
   }
 
   window.ns = ns;
