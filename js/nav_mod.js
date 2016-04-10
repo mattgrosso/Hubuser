@@ -7,6 +7,7 @@
 
   ns.doNav = function doNav(view) {
     $('.view-trigger').hide();
+    $('.active').removeClass('active');
     if(!ns.userData.token && view !== '#login'){
       window.location.hash = '#login';
       return;
@@ -36,8 +37,10 @@
   ns._addTabs = function addTabs(type, hash) {
     if(type === 'repodetail') {
       $('#temp-tags').empty();
+      $('#temp-tags').addClass('nav nav-tabs');
       $('#temp-tags')
         .append($('<li>')
+          .addClass('active')
           .attr({id: 'repo-detail-tab'})
           .append($('<a>')
             .attr({href: hash})
@@ -48,6 +51,7 @@
       $('#repo-issues-tab').remove();
       $('#temp-tags')
         .append($('<li>')
+          .addClass('active')
           .attr({id: 'repo-issues-tab'})
           .append($('<a>')
             .attr({href: hash})
@@ -58,6 +62,7 @@
       $('#repo-new-issue').remove();
       $('#temp-tags')
         .append($('<li>')
+          .addClass('active')
           .attr({id: 'repo-new-issue'})
           .append($('<a>')
             .attr({href: hash})

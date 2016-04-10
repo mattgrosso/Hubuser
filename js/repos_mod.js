@@ -6,6 +6,7 @@
   var repoList = [];
 
   ns.repos.load = function loadRepos() {
+    $('#nav-repos').addClass('active');
     ajaxRepoList();
   };
 

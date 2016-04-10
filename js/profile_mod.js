@@ -4,9 +4,9 @@
   ns.profile = {};
 
   ns.profile.load = function loadProfile() {
+    $('#nav-profile').addClass('active');
     toggleProfileData();
   };
-
 
   function toggleProfileData() {
     $('#profileUsername').text(ns.userData.username);
