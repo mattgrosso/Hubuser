@@ -419,9 +419,11 @@ function createRepoList(repoArray) {
 }
 
 function addReposToTable(array) {
-  $('#repo-list-table-body').empty();
+  $('#repos').empty();
   $('#repos')
     .append($('<table>')
+      .attr({id: 'repo-table'})
+      .addClass('table table-bordered table-striped table-hover')
       .append($('<thead>')
         .append($('<tr>')
           .append($('<td>')
@@ -443,13 +445,20 @@ function addReposToTable(array) {
     $('#repo-list-table-body')
       .append($('<tr>')
         .append($('<td>')
+          .addClass('repo-table-titles')
           .append($('<a>')
             .attr({href: '#repo-' + each.name})
             .text(each.name)
           )
         )
-        .append($('<td>').text(each.stars))
-        .append($('<td>').text(each.issues))
+        .append($('<td>')
+          .addClass('repo-table-stars')
+          .text(each.stars)
+        )
+        .append($('<td>')
+          .addClass('repo-table-issues')
+          .text(each.issues)
+        )
       );
   });
 }

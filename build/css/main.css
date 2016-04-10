@@ -39,4 +39,15 @@ main {
   #profile-list li {
     padding: 10px; }
 
+#repo-table {
+  width: 75%;
+  margin: auto; }
+  #repo-table thead tr {
+    font-size: 1.75em; }
+  #repo-table tbody tr {
+    font-size: 1.25em; }
+
+.repo-table-stars, .repo-table-issues {
+  text-align: center; }
+
 /*# sourceMappingURL=main.css.map */
