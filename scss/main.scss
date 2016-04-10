@@ -58,9 +58,18 @@ main{
   }
 }
 
-.repo-table-titles{
-}
-
 .repo-table-stars, .repo-table-issues{
   text-align: center;
+}
+
+.repo-detail{
+  h2{
+    margin: 0;
+  }
+  ul{
+    list-style: none;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 1.5em
+  }
 }

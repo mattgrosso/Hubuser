@@ -208,25 +208,13 @@
         .attr({href: '#repoissues-' + data.name})
       )
       .append($('<ul>')
+                .append($('<li>').text('Owner: ' + data.owner.login))
                 .append($('<li>')
-                  .text('Owner: ')
-                  .append($('<p>').text(data.owner.login))
-                )
+                  .text('Stars: ' + data.stargazers_count))
                 .append($('<li>')
-                  .text('Stars: ')
-                  .append($('<p>').text(data.stargazers_count))
-
-                )
+                  .text('Forks: ' + data.forks_count))
                 .append($('<li>')
-                  .text('Forks: ')
-                  .append($('<p>').text(data.forks_count))
-
-                )
-                .append($('<li>')
-                  .text('Created on: ')
-                  .append($('<p>').text(data.created_at))
-
-                )
+                  .text('Created on: ' + data.created_at))
       );
   }
 
