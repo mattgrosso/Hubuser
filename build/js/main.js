@@ -9,7 +9,7 @@
     ajaxLogin();
   });
 
-  ajaxLogin = function ajaxLogin() {
+  function ajaxLogin() {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/user',
@@ -25,7 +25,7 @@
         alert('Invalid Token. Please check your entry and resubmit.');
       }
     });
-  };
+  }
 
   function createUserObject(data) {
     ns.userData.username = data.login;
@@ -72,7 +72,7 @@
   });
 
 
-  doNav = function doNav(view) {
+  function doNav(view) {
     $('.view-trigger').hide();
     $('.active').removeClass('active');
     if(!ns.userData.token && view !== '#login'){
@@ -99,7 +99,7 @@
       return;
     }
     viewElement.show();
-  };
+  }
 
 
 

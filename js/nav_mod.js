@@ -7,7 +7,7 @@
   });
 
 
-  doNav = function doNav(view) {
+  function doNav(view) {
     $('.view-trigger').hide();
     $('.active').removeClass('active');
     if(!ns.userData.token && view !== '#login'){
@@ -34,7 +34,7 @@
       return;
     }
     viewElement.show();
-  };
+  }
 
 
 
