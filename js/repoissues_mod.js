@@ -3,20 +3,16 @@
 
   ns.repoIssues = {};
 
-//1. ajax to get issues from given repo
-//2. display those issues in a table
-
   ns.repoIssues.load = function loadRepoIssues(repoName, cb) {
     $('#repo-new-issue').remove();
     ajaxRepoIssues(repoName, cb);
   };
 
-//1. ajax to get issues from a given repo
   function ajaxRepoIssues(repoName, cb) {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/repos/' + ns.userData.username + '/' + repoName + '/issues',
-      headers: {Authorization: "token " + ns.userData.token},
+      headers: {Authorization: 'token ' + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
         console.log(data);
@@ -27,10 +23,8 @@
         console.log(xhr);
       }
     });
-
   }
 
-//2. display those issues in a table
   function createRepoIssuesTable(data) {
     $('.repo-issues').empty();
     $('.repo-issues')
@@ -39,7 +33,7 @@
       .append($('<h2>')
         .append($('<a>')
           .text(window.location.hash.substr(12))
-          .attr({href: 'https://github.com/' + ns.userData.username + "/" + window.location.hash.substr(12) + "/issues", target: '_blank'})
+          .attr({href: 'https://github.com/' + ns.userData.username + '/' + window.location.hash.substr(12) + '/issues', target: '_blank'})
         )
       )
       .append($('<a>')
@@ -93,15 +87,6 @@
     });
     return($('.repo-issues'));
   }
-
-
-
-
-
-
-
-
-
-
+  
   window.ns = ns;
 })(window.ns || {});

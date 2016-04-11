@@ -3,17 +3,11 @@
 
   ns.reponewissue = {};
 
-  //This module needs to
-  //1. Open a new tab
-  //2. Add a form and a header
-  //3. Post the new issue upon submit of the form.
-
   ns.reponewissue.load = function loadNewIssue() {
     ns._addTabs('reponewissue', window.location.hash);
     populateNewIssueForm();
   };
 
-  //Add a form and a header.
   function populateNewIssueForm() {
     $('#reponewissue').empty();
     $('#reponewissue')
@@ -48,12 +42,11 @@
     );
   });
 
-  // Post new issue on click.
   function ajaxPostNewIssue(title, body) {
     $.ajax({
       type: 'POST',
       url: 'https://api.github.com/repos/' + ns.reponewissue.repoOwner + '/'+ ns.reponewissue.repoName + '/issues',
-      headers: {Authorization: "token " + ns.userData.token},
+      headers: {Authorization: 'token ' + ns.userData.token},
       dataType: 'JSON',
       contentType: 'application/json',
       data: JSON.stringify({

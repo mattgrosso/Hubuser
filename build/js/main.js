@@ -6,15 +6,15 @@
   $('#login').on('submit', function githubLogin(event) {
     event.preventDefault();
     ns.userData.token = $(this).find('#token-entry').val();
-    ns.ajaxLogin();
+    ajaxLogin();
   });
 
-  ns.ajaxLogin = function ajaxLogin() {
+  ajaxLogin = function ajaxLogin() {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/user',
       dataType: 'JSON',
-      headers: {Authorization: "token " + ns.userData.token},
+      headers: {Authorization: 'token ' + ns.userData.token},
       success: function tokenAcquired(data) {
         createUserObject(data);
         $('#navbar').show();
@@ -68,18 +68,18 @@
 
 
   window.addEventListener('hashchange', function hashNav(event) {
-    ns.doNav(window.location.hash);
+    doNav(window.location.hash);
   });
 
 
-  ns.doNav = function doNav(view) {
+  doNav = function doNav(view) {
     $('.view-trigger').hide();
     $('.active').removeClass('active');
     if(!ns.userData.token && view !== '#login'){
       window.location.hash = '#login';
       return;
     }
-    view = (view || "");
+    view = (view || '');
     var viewElement = $(view);
     var modName = view.substr(1);
     if(ns[modName] && ns[modName].load){
@@ -145,7 +145,7 @@
 
 
   ns.init = function init() {
-    ns.doNav(window.location.hash);
+    doNav(window.location.hash);
   };
 
 
@@ -199,8 +199,8 @@
   function ajaxRepoDetails(repoName, cb) {
     $.ajax({
       type: 'GET',
-      url: 'https://api.github.com/repos/' + ns.userData.username + "/" + repoName,
-      headers: {Authorization: "token " + ns.userData.token},
+      url: 'https://api.github.com/repos/' + ns.userData.username + '/' + repoName,
+      headers: {Authorization: 'token ' + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
         ns.reponewissue.repoName = data.name;
@@ -250,20 +250,16 @@
 
   ns.repoIssues = {};
 
-//1. ajax to get issues from given repo
-//2. display those issues in a table
-
   ns.repoIssues.load = function loadRepoIssues(repoName, cb) {
     $('#repo-new-issue').remove();
     ajaxRepoIssues(repoName, cb);
   };
 
-//1. ajax to get issues from a given repo
   function ajaxRepoIssues(repoName, cb) {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/repos/' + ns.userData.username + '/' + repoName + '/issues',
-      headers: {Authorization: "token " + ns.userData.token},
+      headers: {Authorization: 'token ' + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
         console.log(data);
@@ -274,10 +270,8 @@
         console.log(xhr);
       }
     });
-
   }
 
-//2. display those issues in a table
   function createRepoIssuesTable(data) {
     $('.repo-issues').empty();
     $('.repo-issues')
@@ -286,7 +280,7 @@
       .append($('<h2>')
         .append($('<a>')
           .text(window.location.hash.substr(12))
-          .attr({href: 'https://github.com/' + ns.userData.username + "/" + window.location.hash.substr(12) + "/issues", target: '_blank'})
+          .attr({href: 'https://github.com/' + ns.userData.username + '/' + window.location.hash.substr(12) + '/issues', target: '_blank'})
         )
       )
       .append($('<a>')
@@ -340,16 +334,7 @@
     });
     return($('.repo-issues'));
   }
-
-
-
-
-
-
-
-
-
-
+  
   window.ns = ns;
 })(window.ns || {});
 
@@ -358,17 +343,11 @@
 
   ns.reponewissue = {};
 
-  //This module needs to
-  //1. Open a new tab
-  //2. Add a form and a header
-  //3. Post the new issue upon submit of the form.
-
   ns.reponewissue.load = function loadNewIssue() {
     ns._addTabs('reponewissue', window.location.hash);
     populateNewIssueForm();
   };
 
-  //Add a form and a header.
   function populateNewIssueForm() {
     $('#reponewissue').empty();
     $('#reponewissue')
@@ -403,12 +382,11 @@
     );
   });
 
-  // Post new issue on click.
   function ajaxPostNewIssue(title, body) {
     $.ajax({
       type: 'POST',
       url: 'https://api.github.com/repos/' + ns.reponewissue.repoOwner + '/'+ ns.reponewissue.repoName + '/issues',
-      headers: {Authorization: "token " + ns.userData.token},
+      headers: {Authorization: 'token ' + ns.userData.token},
       dataType: 'JSON',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -439,80 +417,77 @@
     ajaxRepoList();
   };
 
-
-function ajaxRepoList() {
-  $.ajax({
-    type: 'GET',
-    url: 'https://api.github.com/users/' + ns.userData.username + '/repos',
-    headers: {Authorization: "token " + ns.userData.token},
-    dataType: 'JSON',
-    success: function repoListAcquired(data) {
-      createRepoList(data);
-      addReposToTable(repoList);
-    },
-    error: function repoListNotAcquired(xhr) {
-      console.log(xhr);
-    }
-  });
-}
-
-// ns.repos._createRepoList = function createRepoList(repoArray) {
-function createRepoList(repoArray) {
-  repoList = [];
-  repoArray.forEach(function pullRepoData(each) {
-    repoList.push({
-      name: each.name,
-      stars: each.stargazers_count,
-      issues: each.open_issues
+  function ajaxRepoList() {
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.github.com/users/' + ns.userData.username + '/repos',
+      headers: {Authorization: 'token ' + ns.userData.token},
+      dataType: 'JSON',
+      success: function repoListAcquired(data) {
+        createRepoList(data);
+        addReposToTable(repoList);
+      },
+      error: function repoListNotAcquired(xhr) {
+        console.log(xhr);
+      }
     });
-  });
-}
+  }
 
-function addReposToTable(array) {
-  $('#repos').empty();
-  $('#repos')
-    .append($('<table>')
-      .attr({id: 'repo-table'})
-      .addClass('table table-bordered table-striped table-hover')
-      .append($('<thead>')
-        .append($('<tr>')
-          .append($('<td>')
-            .text('Name')
-          )
-          .append($('<td>')
-            .text('Stars')
-          )
-          .append($('<td>')
-            .text('Open Issues')
-          )
-        )
-      )
-      .append($('<tbody>')
-        .attr({id: 'repo-list-table-body'})
-      )
-    );
-  array.forEach(function addRepoToNewRow(each) {
-    $('#repo-list-table-body')
-      .append($('<tr>')
-        .append($('<td>')
-          .addClass('repo-table-titles')
-          .append($('<a>')
-            .attr({href: '#repo-' + each.name})
-            .text(each.name)
+  function createRepoList(repoArray) {
+    repoList = [];
+    repoArray.forEach(function pullRepoData(each) {
+      repoList.push({
+        name: each.name,
+        stars: each.stargazers_count,
+        issues: each.open_issues
+      });
+    });
+  }
+
+  function addReposToTable(array) {
+    $('#repos').empty();
+    $('#repos')
+      .append($('<table>')
+        .attr({id: 'repo-table'})
+        .addClass('table table-bordered table-striped table-hover')
+        .append($('<thead>')
+          .append($('<tr>')
+            .append($('<td>')
+              .text('Name')
+            )
+            .append($('<td>')
+              .text('Stars')
+            )
+            .append($('<td>')
+              .text('Open Issues')
+            )
           )
         )
-        .append($('<td>')
-          .addClass('repo-table-stars')
-          .text(each.stars)
-        )
-        .append($('<td>')
-          .addClass('repo-table-issues')
-          .text(each.issues)
+        .append($('<tbody>')
+          .attr({id: 'repo-list-table-body'})
         )
       );
-  });
-}
-
+    array.forEach(function addRepoToNewRow(each) {
+      $('#repo-list-table-body')
+        .append($('<tr>')
+          .append($('<td>')
+            .addClass('repo-table-titles')
+            .append($('<a>')
+              .attr({href: '#repo-' + each.name})
+              .text(each.name)
+            )
+          )
+          .append($('<td>')
+            .addClass('repo-table-stars')
+            .text(each.stars)
+          )
+          .append($('<td>')
+            .addClass('repo-table-issues')
+            .text(each.issues)
+          )
+        );
+    });
+  }
 
   window.ns = ns;
 })(window.ns || {});

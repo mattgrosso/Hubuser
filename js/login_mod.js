@@ -6,15 +6,15 @@
   $('#login').on('submit', function githubLogin(event) {
     event.preventDefault();
     ns.userData.token = $(this).find('#token-entry').val();
-    ns.ajaxLogin();
+    ajaxLogin();
   });
 
-  ns.ajaxLogin = function ajaxLogin() {
+  ajaxLogin = function ajaxLogin() {
     $.ajax({
       type: 'GET',
       url: 'https://api.github.com/user',
       dataType: 'JSON',
-      headers: {Authorization: "token " + ns.userData.token},
+      headers: {Authorization: 'token ' + ns.userData.token},
       success: function tokenAcquired(data) {
         createUserObject(data);
         $('#navbar').show();

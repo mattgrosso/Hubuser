@@ -3,18 +3,18 @@
 
 
   window.addEventListener('hashchange', function hashNav(event) {
-    ns.doNav(window.location.hash);
+    doNav(window.location.hash);
   });
 
 
-  ns.doNav = function doNav(view) {
+  doNav = function doNav(view) {
     $('.view-trigger').hide();
     $('.active').removeClass('active');
     if(!ns.userData.token && view !== '#login'){
       window.location.hash = '#login';
       return;
     }
-    view = (view || "");
+    view = (view || '');
     var viewElement = $(view);
     var modName = view.substr(1);
     if(ns[modName] && ns[modName].load){
@@ -80,7 +80,7 @@
 
 
   ns.init = function init() {
-    ns.doNav(window.location.hash);
+    doNav(window.location.hash);
   };
 
 

@@ -13,8 +13,8 @@
   function ajaxRepoDetails(repoName, cb) {
     $.ajax({
       type: 'GET',
-      url: 'https://api.github.com/repos/' + ns.userData.username + "/" + repoName,
-      headers: {Authorization: "token " + ns.userData.token},
+      url: 'https://api.github.com/repos/' + ns.userData.username + '/' + repoName,
+      headers: {Authorization: 'token ' + ns.userData.token},
       dataType: 'JSON',
       success: function repoListAcquired(data) {
         ns.reponewissue.repoName = data.name;
